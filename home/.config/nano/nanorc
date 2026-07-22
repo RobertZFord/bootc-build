@@ -1,0 +1,9 @@
+set autoindent
+#set emptyline
+#set guidestripe 80
+#set indicator
+set linenumbers
+set minibar
+set tabsize 4
+set tabstospaces
+#set zero

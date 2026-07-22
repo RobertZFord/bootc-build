@@ -1,0 +1,25 @@
+# [customizations]
+# hostname = "babby"
+
+[customizations.kernel]
+#name = "kernel-debug"
+append = "fbcon=rotate:1"
+
+#        #[customizations.timezone]
+#        #timezone = "US/Eastern"
+
+#        [[customizations.group]]
+#        name = "rob"
+#        gid = 1000
+
+#        [[customizations.user]]
+#        name = "rob"
+#        description = "Normal Account"
+#        # mkpasswd --salt=4hkdXiEWlvvhEakz --method=sha512crypt --rounds=695876
+#        password = "$6$rounds=695876$4hkdXiEWlvvhEakz$mxU4VMtyFCf8S6dELVqIsM1sLU5e5ickJMreLWCJy8tPGDF9P9poDXvEWT5NFUw4B08kzu6s/PCHsb8bimCWc0"
+#        key = "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDzPYC/I1Udsv7awHXMJpdz6C20gNgfGVtJR1Xv+K6k+AAAADXNzaDpTZWNvbmRhcnk= rob@fedora"
+#        home = "/var/home/rob/"
+#        shell = "/usr/bin/bash"
+#        groups = ["rob", "wheel"]
+#        uid = 1000
+#        gid = 1000

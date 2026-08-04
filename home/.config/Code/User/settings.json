@@ -1,0 +1,6 @@
+{
+    "chat.disableAIFeatures": true,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'JetBrains Mono', monospace",
+    "workbench.editor.useModal": "off"
+}

@@ -1,0 +1,42 @@
+<!--
+I don't *love* this, but downloading all the packages and their dependencies is
+as simple as running `dotnet restore` against this file, and it downloads 
+everything to our offline cache, so...
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- <PackageReference Include="" Version="" /> -->
+
+        <!-- for the blazorwasm template -->
+        <!-- <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"             Version="10.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"   Version="10.0.9" PrivateAssets="all" /> -->
+
+        <!-- it complained about not having these at runtime -->
+        <!-- <PackageReference Include="Microsoft.Dotnet.Hotreload.Webassembly.Browser"      Version="10.0.109"  />
+        <PackageReference Include="Microsoft.Net.Sdk.Webassembly.Pack"                  Version="10.0.9"    />
+        <PackageReference Include="Microsoft.Aspnetcore.App.Internal.Assets"            Version="10.0.9"    />
+        <PackageReference Include="Microsoft.Netcore.App.Runtime.Mono.Browser-Wasm"     Version="10.0.9"    /> -->
+
+        <!-- for the xunit template -->
+        <PackageReference Include="coverlet.collector"                                      Version="6.0.4" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk"                                  Version="17.14.1" />
+        <PackageReference Include="xunit"                                                   Version="2.9.3" />
+        <PackageReference Include="xunit.v3"                                                Version="3.2.2" />
+        <PackageReference Include="xunit.runner.visualstudio"                               Version="3.1.4" />
+
+        <!-- for the grpc template -->
+        <PackageReference Include="Grpc.AspNetCore"                                         Version="2.64.0" />
+
+        <!-- for the webapi / webapiaot template -->
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"                            Version="10.0.9" />
+
+        <!-- these are apparently only compatible with the net10 target -->
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"       Version="10.0.9"    />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect"   Version="10.0.9"    />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate"     Version="10.0.9"    />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+<Solution>
+    <Project Path="00-packages-to-restore-net10.csproj" />
+    <Project Path="01-packages-to-restore-netstandard.csproj" />
+    <Project Path="02-packages-to-restore-blazorwasm.csproj" />
+</Solution>

@@ -1,0 +1,3 @@
+include /etc/sway/config.d/*
+include /var/home/rob/.config/sway/config.d/00-stock/*.conf
+include /var/home/rob/.config/sway/config.d/01-custom/*.conf

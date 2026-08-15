@@ -217,12 +217,15 @@ RUN curl --location --output ESP32_S3_OCTAL-1.17.0.285.zip https://dl.cloudsmith
 RUN echo "4f89c851ef18719b8020f29abb90e365d9672f468d8fd8567bf496304a2e9c0c  ESP32_S3_OCTAL-1.17.0.285.zip" | sha256sum --check --quiet || false
 RUN unzip -d ESP32_S3_OCTAL-1.17.0.285 ESP32_S3_OCTAL-1.17.0.285.zip
 
+#WORKDIR /var/home/rob/.nuget/99-nuget-cli-hack
+
 
 USER root
 # necessary for nanoff to run, weirdly
-RUN dnf install --assumeyes dotnet-runtime-8.0 nuget mono-complete
-
-
+RUN dnf install --assumeyes dotnet-runtime-8.0 mono-complete mono-developer
+# installs to /usr/bin/nuget
+#RUN dnf install --assumeyes nuget
+RUN curl --location --output /usr/local/bin/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 
 # =========
 #   final
@@ -252,6 +255,44 @@ RUN dotnet nuget config set globalPackagesFolder /tmp/nuget-package-cache
 # connect to.
 RUN dotnet nuget disable source nuget.org
 
+
+# this is extremely stupid.  nuget cli (not `dotnet nuget`) apparently won't see
+# packages if they're in directories?  idk.  it wouldn't read from the typical
+# dotnet layout, with `packagename/packageversion` hierarchy.  if we symlink all
+# our packages into a flat directory, we can make it available to the nuget cli
+# in general, which should allow the nanoframework extension to properly resolve
+# packages
+#RUN mkdir /var/home/rob/.nuget/99-nuget-cli-hack
+#RUN find /var/home/rob/.nuget -iname '*.nupkg' | xargs -I {} sh -c 'ln --symbolic --force {} /var/home/rob/.nuget/99-nuget-cli-hack/$(basename {})'
+# copy the dotnet cli nuget config to the nuget cli config location.  why????
+RUN mkdir -p /var/home/rob/.config/NuGet/ && cp /var/home/rob/.nuget/NuGet/NuGet.Config /var/home/rob/.config/NuGet/NuGet.Config
+#RUN nuget sources add -Name hack -Source /var/home/rob/.nuget/99-nuget-cli-hack
+
+
+
 USER root
 RUN rm -rf /temp-root
 RUN rm -rf /temp-user
+
+
+# from https://learn.microsoft.com/en-us/nuget/reference/nuget-exe-cli-reference?tabs=macos#installing-nugetexe
+# the stock nuget package for fedora was not enough
+COPY <<-"EOF" /usr/bin/nuget
+#!/bin/sh
+mono /usr/local/bin/nuget.exe "$@"
+EOF
+RUN chmod +x /usr/bin/nuget
+
+# above seems to work
+
+#COPY <<-"EOF" /usr/bin/msbuild
+COPY <<-"EOF" /usr/lib/mono/xbuild/14.0/bin/msbuild
+#!/usr/bin/sh
+MONO_GC_PARAMS="nursery-size=64m,$MONO_GC_PARAMS" exec /usr/bin/mono $MONO_OPTIONS /usr/lib/mono/xbuild/14.0/bin/xbuild.exe "$@"
+EOF
+RUN chmod +x /usr/lib/mono/xbuild/14.0/bin/msbuild
+
+RUN <<EOF
+echo 'PATH="/usr/lib/mono/xbuild/14.0/bin/:$PATH"' >> /var/home/rob/.bashrc
+echo 'export PATH' >> /var/home/rob/.bashrc
+EOF

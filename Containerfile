@@ -176,25 +176,6 @@ RUN code --install-extension ms-dotnettools.csdevkit
 # if the directory doesn't exist, it whines at you during restore
 #RUN mkdir ~/.nuget/packages
 
-# RUN mkdir /temp-user/user
-# RUN ls -al *
-
-
-# WORKDIR /temp-user
-# RUN mkdir test
-# RUN ls -al *
-
-
-
-
-# COPY --chown=rob:rob ./misc/00-packages-to-restore-net10.csproj /temp-user/00-packages-to-restore-net10/restore.csproj
-# COPY --chown=rob:rob ./misc/01-packages-to-restore-netstandard.csproj /temp-user/01-packages-to-restore-netstandard/restore.csproj
-# WORKDIR /temp-user/00-packages-to-restore-net10
-# RUN dotnet restore
-# WORKDIR /temp-user/01-packages-to-restore-netstandard
-# RUN dotnet restore
-
-
 COPY --chown=rob:rob ./misc/dotnet-packages /temp-user/dotnet-package-restore/
 WORKDIR /temp-user/dotnet-package-restore
 #RUN dotnet restore packages-to-restore.slnx

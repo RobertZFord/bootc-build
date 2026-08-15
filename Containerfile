@@ -53,12 +53,10 @@ EOF
 RUN dnf --assumeyes install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 
+
 # ==================
 #   1.2   packages
 # ==================
-
-
-#RUN dnf install --assumeyes   neovim git tmux
 
 RUN dnf install --assumeyes \
     neovim \
@@ -68,23 +66,30 @@ RUN dnf install --assumeyes \
     sway \
     rofi \
     thunar \
-    firefox
+    firefox \
+    waybar \
+    glibc-langpack-en \
+    chromium \
+    minicom \
+    lrzsz \
+    tio
+
+# ENV LANG=en_US.UTF-8
+# ENV LANGUAGE=en_US:en
+# ENV LC_ALL=en_US.UTF-8
+# ENV TZ=America/New_York
+#RUN localectl set-locale en_US.UTF-8
+#RUN timedatectl set-timezone America/New_York
 
 # =======
 #   GUI
 # =======
-#RUN dnf install --assumeyes  sddm sway firefox thunar rofi
 
 RUN dnf install --assumeyes  cmus
 RUN dnf swap --assumeyes  ffmpeg-free ffmpeg --allowerasing
 
 
-
 RUN echo 'include /var/home/rob/.config/sway/config.d/*' >> /etc/sway/config
-
-
-
-
 
 
 # ==================================
@@ -139,23 +144,6 @@ RUN curl --location --output imhex-1.38.1-Fedora-43-x86_64.rpm  https://github.c
 RUN echo "79658c0b21bc176fb25d92d16e0e26b909cb8345f51c833ecab059ae2253a7dd  imhex-1.38.1-Fedora-43-x86_64.rpm" | sha256sum --check --quiet || false
 RUN dnf --assumeyes install ./imhex-1.38.1-Fedora-43-x86_64.rpm
 RUN rm imhex-1.38.1-Fedora-43-x86_64.rpm
-
-
-
-
-# ENV LANG=en_US.UTF-8
-# ENV LANGUAGE=en_US:en
-# ENV LC_ALL=en_US.UTF-8
-# ENV TZ=America/New_York
-RUN dnf install --assumeyes \
-    waybar \
-    glibc-langpack-en
-#RUN localectl set-locale en_US.UTF-8
-#RUN timedatectl set-timezone America/New_York
-
-RUN dnf install --assumeyes minicom lrzsz tio
-
-
 
 
 # JetBrains Mono font
@@ -219,7 +207,6 @@ RUN find . -iname '*.csproj' -exec dotnet restore /p:RequiresAspNetWebAssets=tru
 
 # ============== above stuff is good
 USER root
-RUN dnf install --assumeyes chromium
 
 # migrate to just using a folder and loose files
 # per https://docs.docker.com/reference/dockerfile/#copy :

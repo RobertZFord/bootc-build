@@ -19,6 +19,17 @@
 
 FROM quay.io/fedora/fedora-bootc:44
 
+# I'm thinking...
+#   1   root system (wm, file management, etc)
+#   2   additional items (serial comms, web browsers for dev, manual installs etc)
+#   3   dev stuff
+#   3.1 C#
+#   3.2 Rust?
+#   3.3 ESP32
+#   4   experimental
+#   4.1 root
+#   4.2 user
+
 # ==============================================================================
 #   1.0   core components + configuration
 #   this is the common stuff that makes the system useable, things like the GUI,

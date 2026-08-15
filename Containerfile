@@ -130,14 +130,6 @@ RUN dnf install --assumeyes code \
 RUN dnf install --assumeyes dotnet-sdk-10.0
 
 
-# ==============================================================================
-#   WIP / experimental
-#   this is for things that are current a WIP; placed at the end to avoid
-#   unnecessary podman layer builds.  when done, move into one of the sections
-#   above
-# ==============================================================================
-
-
 # ImHex
 WORKDIR /temp-root
 RUN curl --location --output imhex-1.38.1-Fedora-43-x86_64.rpm  https://github.com/WerWolv/ImHex/releases/download/v1.38.1/imhex-1.38.1-Fedora-43-x86_64.rpm
@@ -191,6 +183,45 @@ USER root
 # per https://docs.docker.com/reference/dockerfile/#copy :
 # "The directory itself isn't copied, only its contents."
 COPY --chown=rob:rob ./home /var/home/rob
+
+
+
+
+
+# ==============================================================================
+#   WIP / experimental
+#   this is for things that are current a WIP; placed at the end to avoid
+#   unnecessary podman layer builds.  when done, move into one of the sections
+#   above
+# ==============================================================================
+USER rob
+WORKDIR /temp-user
+RUN code --install-extension nanoframework.vscode-nanoframework
+RUN dotnet tool install -g nanoff
+RUN ln -s /var/home/rob/.dotnet/tools/nanoff /var/home/rob/bin/nanoff
+
+WORKDIR /var/home/rob/bin
+RUN curl --location --output esptool-v5.3.0-linux-amd64.tar.gz             https://github.com/espressif/esptool/releases/download/v5.3.0/esptool-v5.3.0-linux-amd64.tar.gz
+RUN echo "46ca7b52c309790bc4d140990680f6088e8cad40b230fda6999661efc24845b6  esptool-v5.3.0-linux-amd64.tar.gz" | sha256sum --check --quiet || false
+RUN tar --extract --file esptool-v5.3.0-linux-amd64.tar.gz
+RUN ln -s ./esptool-linux-amd64/esptool ./esptool
+RUN rm esptool-v5.3.0-linux-amd64.tar.gz
+
+RUN ln -s /usr/bin/xbuild ./msbuild
+
+WORKDIR /var/home/rob/esp-firmware
+RUN curl --location --output ESP32_S3_QUAD-1.17.0.285.zip https://dl.cloudsmith.io/public/net-nanoframework/nanoframework-images/raw/names/ESP32_S3_QUAD/versions/1.17.0.285/ESP32_S3_QUAD-1.17.0.285.zip
+RUN echo "9719576b28d925fe9cd0b5edd7a06c0d0ceea68d1fff3bca44671f80b8ab56ea  ESP32_S3_QUAD-1.17.0.285.zip" | sha256sum --check --quiet || false
+RUN unzip -d ESP32_S3_QUAD-1.17.0.285 ESP32_S3_QUAD-1.17.0.285.zip
+RUN curl --location --output ESP32_S3_OCTAL-1.17.0.285.zip https://dl.cloudsmith.io/public/net-nanoframework/nanoframework-images/raw/names/ESP32_S3_OCTAL/versions/1.17.0.285/ESP32_S3_OCTAL-1.17.0.285.zip
+RUN echo "4f89c851ef18719b8020f29abb90e365d9672f468d8fd8567bf496304a2e9c0c  ESP32_S3_OCTAL-1.17.0.285.zip" | sha256sum --check --quiet || false
+RUN unzip -d ESP32_S3_OCTAL-1.17.0.285 ESP32_S3_OCTAL-1.17.0.285.zip
+
+
+USER root
+# necessary for nanoff to run, weirdly
+RUN dnf install --assumeyes dotnet-runtime-8.0 nuget mono-complete
+
 
 
 # =========

@@ -12,6 +12,7 @@ everything to our offline cache, so...
         <!-- <PackageReference Include="" Version="" /> -->
 
         <!-- for the blazorwasm template -->
+        <!-- these were moved to 02-packages-to-restore-blazorwasm.csproj for some reason -->
         <!-- <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"             Version="10.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"   Version="10.0.9" PrivateAssets="all" /> -->
 
@@ -20,6 +21,9 @@ everything to our offline cache, so...
         <PackageReference Include="Microsoft.Net.Sdk.Webassembly.Pack"                  Version="10.0.9"    />
         <PackageReference Include="Microsoft.Aspnetcore.App.Internal.Assets"            Version="10.0.9"    />
         <PackageReference Include="Microsoft.Netcore.App.Runtime.Mono.Browser-Wasm"     Version="10.0.9"    /> -->
+
+        <!-- for the worker template -->
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.*" />
 
         <!-- for the xunit template -->
         <PackageReference Include="coverlet.collector"                                      Version="6.0.4" />
@@ -32,11 +36,11 @@ everything to our offline cache, so...
         <PackageReference Include="Grpc.AspNetCore"                                         Version="2.64.0" />
 
         <!-- for the webapi / webapiaot template -->
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi"                            Version="10.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"                            Version="10.*" />
 
         <!-- these are apparently only compatible with the net10 target -->
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"       Version="10.0.9"    />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect"   Version="10.0.9"    />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate"     Version="10.0.9"    />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"       Version="10.*"    />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect"   Version="10.*"    />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate"     Version="10.*"    />
     </ItemGroup>
 </Project>

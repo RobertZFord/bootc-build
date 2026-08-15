@@ -5,7 +5,17 @@
 
     <ItemGroup>
         <!-- for the blazorwasm template -->
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"             Version="10.0.9" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"   Version="10.0.9" PrivateAssets="all" />
+        <!--
+            these were originally pinned to 10.0.9, but on rebuilding the bootc
+            image, it started looking for 10.0.10, so something in the sdk from
+            the fedora repos changed.  to alleviate this, we should be able to
+            just use the 10.* major version and grab whatever is latest.
+            that shouldn't be too risky since this is an entirely offline
+            machine, and if something wipes it from the inside, c'est la vie.
+
+            it *will* throw warnings on inexact version matches but that's fine
+        -->
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"             Version="10.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"   Version="10.*" PrivateAssets="all" />
     </ItemGroup>
 </Project>

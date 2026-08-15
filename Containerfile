@@ -184,8 +184,6 @@ WORKDIR /temp-user/dotnet-package-restore
 # for some reason, without this RequiresAspNetWebAssets property, dotnet restore doesn't include Microsoft.AspNetCore.App.Internal.Assets as a dependency
 RUN find . -iname '*.csproj' -exec dotnet restore /p:RequiresAspNetWebAssets=true {} \;
 
-#RUN dotnet nuget disable source nuget.org
-
 # ============== above stuff is good
 USER root
 
@@ -199,6 +197,30 @@ COPY --chown=rob:rob ./home /var/home/rob
 #   final
 #   this is for manual in-container moves and such
 # =========
+USER rob
+
+# dotnet restore effectively downloads packages and their dependencies by
+# "restoring" them and caching the results.  this moves all those files to a
+# specific repo directory that we won't want to touch, and then we switch the
+# cache to a directry in `/tmp`.
+# my preference is to rename the original cache directory instead and not have
+# a `packages` directory, so as to not muddle with normal workflow habits
+# elsewhere
+RUN mv /var/home/rob/.nuget/packages /var/home/rob/.nuget/00-stock-packages
+RUN dotnet nuget add source --name local /var/home/rob/.nuget/00-stock-packages
+
+# make a directory for temporary packages (things we might be operating on)
+RUN mkdir /var/home/rob/.nuget/01-temporary-packages
+RUN dotnet nuget add source --name temporary /var/home/rob/.nuget/01-temporary-packages
+
+# move the package cache to a tmpfs mount
+RUN dotnet nuget config set globalPackagesFolder /tmp/nuget-package-cache
+
+# disable the default source - this system will be airgapped, so this will only
+# cause timeouts while it tries to connect to something it will never be able to
+# connect to.
+RUN dotnet nuget disable source nuget.org
+
 USER root
 RUN rm -rf /temp-root
 RUN rm -rf /temp-user

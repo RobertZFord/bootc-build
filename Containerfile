@@ -175,6 +175,8 @@ WORKDIR /temp-user/dotnet-package-restore
 # https://github.com/dotnet/sdk/issues/46165
 # for some reason, without this RequiresAspNetWebAssets property, dotnet restore doesn't include Microsoft.AspNetCore.App.Internal.Assets as a dependency
 RUN find . -iname '*.csproj' -exec dotnet restore /p:RequiresAspNetWebAssets=true {} \;
+#RUN find . -iname '*.csproj' ! -iname '*.prerelease.csproj' -exec dotnet restore /p:RequiresAspNetWebAssets=true {} \;
+#RUN find . -iname '*.prerelease.csproj' -exec asdfasdfasdf {} \;
 
 # ============== above stuff is good
 USER root

@@ -10,6 +10,7 @@ everything to our offline cache, so...
 
     <ItemGroup>
         <!-- <PackageReference Include="" Version="" /> -->
+        <PackageReference Include="System.IO.Ports"                                     Version="10.*"      />
         <PackageReference Include="Dapper"                                              Version="2.1.79"    />
         <PackageReference Include="Microsoft.Data.SqlClient"                            Version="7.0.2"     />
         <PackageReference Include="Microsoft.Data.Sqlite"                               Version="10.0.9"    />

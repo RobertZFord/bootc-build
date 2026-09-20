@@ -2,5 +2,9 @@
     "chat.disableAIFeatures": true,
     "editor.fontLigatures": true,
     "editor.fontFamily": "'JetBrains Mono', monospace",
-    "workbench.editor.useModal": "off"
+    "workbench.editor.useModal": "off",
+    "workbench.tree.indent": 24,
+    "workbench.tree.renderIndentGuides": "always",
+    "explorer.fileNesting.enabled": true
 }
+

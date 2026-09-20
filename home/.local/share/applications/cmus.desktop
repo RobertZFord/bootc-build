@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Cmus
+GenericName=Music Player
+Exec=cmus
+Type=Application
+Categories=MusicPlayer;
+Keywords=cmus;
+

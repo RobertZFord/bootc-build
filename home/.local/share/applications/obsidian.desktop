@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Obsidian
+GenericName=Notes Editor
+Exec=/var/home/rob/bin/obsidian-1.12.7/obsidian
+Type=Application
+Categories=TextEditor;
+Keywords=obsidian;
+MimeType=x-scheme-handler/obsidian;

@@ -5,4 +5,4 @@ Exec=cmus
 Type=Application
 Categories=MusicPlayer;
 Keywords=cmus;
-
+Terminal=true

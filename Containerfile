@@ -78,7 +78,11 @@ RUN dnf install --assumeyes \
     chromium \
     minicom \
     lrzsz \
-    tio
+    tio \
+    pciutils \
+    usbutils \
+    kernel-tools \
+    brightnessctl
 
 # ENV LANG=en_US.UTF-8
 # ENV LANGUAGE=en_US:en

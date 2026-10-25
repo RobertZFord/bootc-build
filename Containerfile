@@ -15,6 +15,16 @@
 # obsidian not found; bashrc path add?
 # prompt doesn't exist, probably missing bashrc stuff
 
+# podman images?
+# do we want to add these...?
+# docker.io/library/eclipse-mosquitto              2.0.22               0745ced90756  11 months ago  11.4 MB
+# docker.io/library/nats                           2.12.3-linux         f2aa68383287  10 months ago  17.3 MB
+# docker.io/library/rabbitmq                       4.2.2                4df7ca7f8409  10 months ago  244 MB
+# docker.io/library/redis                          7.2.1                5b0542ad1e77  3 years ago    142 MB
+# docker.io/valkey/valkey                          9.0.1                8c78a9d757ed  9 months ago   115 MB
+# mcr.microsoft.com/mssql/rhel/server              2022-CU23-rhel-9.1   28ae7e42dfb7  8 months ago   2.09 GB
+# mcr.microsoft.com/mssql/rhel/server              2025-CU8-rhel-9.1    a94215d2bf03  2 months ago   2.3 GB
+
 
 
 FROM quay.io/fedora/fedora-bootc:44

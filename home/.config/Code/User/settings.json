@@ -5,6 +5,7 @@
     "workbench.editor.useModal": "off",
     "workbench.tree.indent": 24,
     "workbench.tree.renderIndentGuides": "always",
-    "explorer.fileNesting.enabled": true
+    "explorer.fileNesting.enabled": true,
+    "window.customTitleBarVisibility": "windowed"
 }
 

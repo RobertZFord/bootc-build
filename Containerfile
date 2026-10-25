@@ -174,6 +174,7 @@ RUN ln -s ./obsidian-1.12.7/obsidian ./obsidian
 RUN rm obsidian-1.12.7.tar.gz
 
 RUN code --install-extension ms-dotnettools.csdevkit
+RUN code --install-extension ms-mssql.mssql
 # re-use the default cache directory to prevent doubling up on package use; in
 # 2026 there's apparently no way to disable the cache during restore, so if your
 # local repo is different from the cache directory, it will copy everything from

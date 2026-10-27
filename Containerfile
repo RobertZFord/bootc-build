@@ -92,7 +92,9 @@ RUN dnf install --assumeyes \
     pciutils \
     usbutils \
     kernel-tools \
-    brightnessctl
+    brightnessctl \
+    bc \
+    wev
 
 # ENV LANG=en_US.UTF-8
 # ENV LANGUAGE=en_US:en

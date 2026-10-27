@@ -51,5 +51,8 @@ everything to our offline cache, so...
         <PackageReference Include="Microsoft.Orleans.Persistence.Memory"                 Version="10.*" />
         <PackageReference Include="Microsoft.Orleans.Persistence.AdoNet"                 Version="10.*" />
         <PackageReference Include="Microsoft.Orleans.Persistence.Redis"                  Version="10.*" />
+
+        <!-- taking a look at this -->
+        <PackageReference Include="System.Formats.Cbor"                                  Version="10.*" />
     </ItemGroup>
 </Project>

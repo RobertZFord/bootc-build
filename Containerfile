@@ -59,7 +59,7 @@ EOF
 
 # assign ownership of the TTL USB adapter to the stock username, and set the
 # baud rate to something somewhat fast-ish
-COPY <<EOF /etc/udev/rules.d/51-usb-ttl.rules
+COPY <<'EOF' /etc/udev/rules.d/51-usb-ttl.rules
   ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", RUN+="/bin/sh -c 'chown rob:rob $env{DEVNAME} && stty -F $env{DEVNAME} 921600'"
 EOF
 
